@@ -1,0 +1,32 @@
+# .env and .pem file locations are hardcoded to be in the pwd (working dir)
+
+version: "3.9"
+services:
+  ui:
+    image: minhnhatnoe/codefun-debug-frontend:latest
+    networks: [ cfd-bridge ]
+    restart: unless-stopped
+
+  back:
+    image: minhnhatnoe/codefun-debug-backend:latest
+    networks: [ cfd-bridge ]
+    env_file: backend.env
+    restart: unless-stopped
+
+  proxy:
+    image: minhnhatnoe/codefun-debug-proxy:latest
+    networks: [ cfd-bridge ]
+    ports:
+    - 80:80
+    - 443:443
+    volumes:
+    - type: bind
+      source: cert.pem
+      target: /cert/cert.pem
+      read_only: true
+    env_file: proxy.env
+    restart: unless-stopped
+
+networks:
+  cfd-bridge:
+    driver: bridge
