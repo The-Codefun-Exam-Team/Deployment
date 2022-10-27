@@ -55,7 +55,6 @@ def compose_up():
 def check_availability(hostname: str, verify: bool) -> None:
     requests.packages.urllib3.disable_warnings()
     def check_frontend():
-        print(verify)
         r = requests.get(f"https://{hostname}/login", verify=verify)
         if r.status_code != 200:
             raise RuntimeError("Frontend not live")
