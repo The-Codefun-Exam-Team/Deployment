@@ -107,13 +107,13 @@ if __name__ == '__main__':
     no_ip_password = input("No-IP password: ")
     c = fabric.Connection(host=ssh_addr, user="root")
 
-    c.run("rm -r Deployment")
-    c.run("git pull https://github.com/The-Codefun-Exam-Team/Deployment.git")
+    c.run("rm -f -r Deployment")
+    c.run("git clone https://github.com/The-Codefun-Exam-Team/Deployment.git")
     c.run("cd Deployment")
 
     t = transfer.Transfer(c)
     for name in config_files:
         t.put(name, name)
     
-    c.run(f"python3 -c 'from single-click.py import local_setup;\
+    c.run(f"python3 -c 'from single-click import local_setup; \
 local_setup({real_domain}, {no_ip_domain}, ({no_ip_username}, {no_ip_password}))'")
