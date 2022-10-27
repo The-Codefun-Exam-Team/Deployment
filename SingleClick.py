@@ -1,4 +1,5 @@
 """Deploy the all parts of the project with a single click."""
+import time
 import requests
 import subprocess
 VERSION = 'v1.0.0'
@@ -91,9 +92,13 @@ def local_setup(real_domain: str, no_ip_domain: str, no_ip_cred: tuple[str, str]
     check_config()
     install_docker()
     compose_up()
+    print("Waiting for services to finish setting up")
+    time.sleep(10)
     check_availability("localhost", False)
 
     no_ip_update(no_ip_domain, no_ip_cred, "abc@def.com")
+    print("Waiting 5 mins for No-IP records update")
+    time.sleep(5*60)
     check_availability(real_domain, True)
 
 if __name__ == '__main__':
