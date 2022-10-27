@@ -53,8 +53,9 @@ def compose_up():
 
 
 def check_availability(hostname: str, verify: bool) -> None:
-    requests.packages.urllib3.disable_warnings() 
+    requests.packages.urllib3.disable_warnings()
     def check_frontend():
+        print(verify)
         r = requests.get(f"https://{hostname}/login", verify=verify)
         if r.status_code != 200:
             raise RuntimeError("Frontend not live")
@@ -106,12 +107,12 @@ if __name__ == '__main__':
     no_ip_username = input("No-IP username: ")
     no_ip_password = input("No-IP password: ")
     c = fabric.Connection(host=ssh_addr, user="root")
-
+    c.run("sudo apt update; sudo apt -qq -y install git")
     c.run("rm -f -r Deployment")
     c.run("git clone https://github.com/The-Codefun-Exam-Team/Deployment.git")
 
     t = transfer.Transfer(c)
     for name in config_files:
-        t.put(name, f"Deployment/name")
-    c.run(f"cd Deployment; python3 -c 'from SingleClick import local_setup; \
-local_setup('{real_domain}', '{no_ip_domain}', ('{no_ip_username}', '{no_ip_password}'))'")
+        t.put(name, f"Deployment/{name}")
+    function = f"local_setup('{real_domain}', '{no_ip_domain}', ('{no_ip_username}', '{no_ip_password}'))"
+    c.run(f'cd Deployment; python3 -c "from SingleClick import local_setup; {function}"')
