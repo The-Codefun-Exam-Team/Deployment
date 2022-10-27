@@ -5,7 +5,7 @@ VERSION = 'v1.0.0'
 
 config_files = ['proxy.env', 'backend.env', 'cert.pem']
 def check_config():
-    print("Creating dummy config files")
+    print("Checking config files")
     for name in config_files:
         with open(name, "r") as file:
             pass
@@ -109,11 +109,9 @@ if __name__ == '__main__':
 
     c.run("rm -f -r Deployment")
     c.run("git clone https://github.com/The-Codefun-Exam-Team/Deployment.git")
-    c.run("cd Deployment")
 
     t = transfer.Transfer(c)
     for name in config_files:
-        t.put(name, name)
-    
-    c.run(f"python3 -c 'from SingleClick import local_setup; \
-local_setup({real_domain}, {no_ip_domain}, ({no_ip_username}, {no_ip_password}))'")
+        t.put(name, f"Deployment/name")
+    c.run(f"cd Deployment; python3 -c 'from SingleClick import local_setup; \
+local_setup('{real_domain}', '{no_ip_domain}', ('{no_ip_username}', '{no_ip_password}'))'")
