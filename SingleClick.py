@@ -115,5 +115,5 @@ if __name__ == '__main__':
     for name in config_files:
         t.put(name, name)
     
-    c.run(f"python3 -c 'from single-click import local_setup; \
+    c.run(f"python3 -c 'from SingleClick import local_setup; \
 local_setup({real_domain}, {no_ip_domain}, ({no_ip_username}, {no_ip_password}))'")
