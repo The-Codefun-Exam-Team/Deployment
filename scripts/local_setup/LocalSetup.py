@@ -14,8 +14,8 @@ if __name__ == '__main__':
     print("Installing docker")
     Docker.install()
 
-    print("Calling docker compose up")
-    Docker.compose_up()
+    # print("Calling docker compose up")
+    # Docker.compose_up()
 
     print("Waiting for services to finish setting up")
     time.sleep(10)
