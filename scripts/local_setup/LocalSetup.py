@@ -6,12 +6,11 @@ print("This is experimental")
 import time, sys
 import NoIP, Checks, Docker
 
-
 if __name__ == '__main__':
     real_domain, no_ip_domain = sys.argv[1], sys.argv[2]
     no_ip_cred = sys.argv[3], sys.argv[4]
 
-    print("Checking config files")
+    print("Checking config files", flush=True)
     Checks.check_config()
     
     print("Installing docker")
