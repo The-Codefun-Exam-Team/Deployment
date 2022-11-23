@@ -37,5 +37,5 @@ def install():
 
 def compose_up():
     print("Starting docker compose")
-    run_command("docker", "compose", "up", "-d", "--quiet-pull")
+    run_command("docker", "compose", "up", "-d")
     print("Finished docker compose up")
