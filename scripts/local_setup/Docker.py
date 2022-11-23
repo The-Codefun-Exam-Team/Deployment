@@ -6,8 +6,8 @@ def run_command(*args) -> subprocess.CompletedProcess:
 
 def setup_repo() -> None:
     def enable_apt_https():
-        run_command("apt", "-qq", "-y", "update")
-        run_command("apt", "-qq", "-y", "install", "ca-certificates",
+        run_command("apt-get", "-qq", "-y", "update")
+        run_command("apt-get", "-qq", "-y", "install", "ca-certificates",
                     "curl", "gnupg", "lsb-release")
 
     def add_gpg_key():
@@ -26,8 +26,8 @@ def setup_repo() -> None:
     setup_repo_apt()
 
 def install_docker_engine() -> None:
-    run_command("apt", "-qq", "-y", "update")
-    run_command("apt", "-qq", "-y", "install", "docker-ce",
+    run_command("apt-get", "-qq", "-y", "update")
+    run_command("apt-get", "-qq", "-y", "install", "docker-ce",
                 "docker-ce-cli", "containerd.io", "docker-compose-plugin")
     run_command("docker", "run", "--rm", "hello-world")
 
