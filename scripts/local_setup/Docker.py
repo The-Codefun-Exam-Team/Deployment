@@ -36,4 +36,6 @@ def install():
     install_docker_engine()
 
 def compose_up():
+    print("Starting docker compose")
     run_command("docker", "compose", "up", "-d")
+    print("Finished docker compose up")
