@@ -4,7 +4,7 @@ import SSH
 config_files = ['proxy.env', 'backend.env', 'cert.pem']
 
 data_path = str(path.realpath(
-        path.join(__file__, path.pardir, path.pardir, "data")))
+        path.join(__file__, path.pardir, path.pardir, path.pardir, "data")))
 
 
 
@@ -17,10 +17,10 @@ if __name__ == '__main__':
     no_ip_password = input("No-IP password: ")
 
     c = SSH.SSHSession(ssh_addr)
-    c.run_command([
-        "sudo apt-get update", "sudo apt-get -qq -y install git",
-        "rm -f -r Deployment",
-        "git clone https://github.com/The-Codefun-Exam-Team/Deployment.git"])
+    # c.run_command([
+    #     "sudo apt-get update", "sudo apt-get -qq -y install git",
+    #     "rm -f -r Deployment",
+    #     "git clone https://github.com/The-Codefun-Exam-Team/Deployment.git"])
     
-    c.send_file(data_path, f"Deployment/data")
-    c.run_command(f'cd Deployment/scripts/local_setup; python3 LocalSetup.py {real_domain} {no_ip_domain} {no_ip_username} {no_ip_password}')
+    # c.send_file(data_path, f"Deployment")
+    c.run_command(f"python3 Deployment/scripts/local_setup/LocalSetup.py {real_domain} {no_ip_domain} {no_ip_username} {no_ip_password}")

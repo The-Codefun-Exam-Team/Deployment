@@ -1,4 +1,5 @@
 import subprocess
+from os import path
 __all__ = ["install", "compose_up"]
 
 def run_command(*args) -> subprocess.CompletedProcess:
@@ -37,5 +38,7 @@ def install():
 
 def compose_up():
     print("Starting docker compose")
-    run_command("docker", "compose", "up", "-d")
+    cwd = str(path.realpath(path.join(__file__,
+                path.pardir, path.pardir, path.pardir)))
+    subprocess.run(["docker", "compose", "up", "-d"], check=True, cwd=cwd)
     print("Finished docker compose up")
