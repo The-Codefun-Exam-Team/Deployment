@@ -9,6 +9,6 @@ class SSHSession:
         subprocess.run(["scp", "-r", src, f"{self.cred}:{dst}"], check=True)
     
     def run_command(self, cmd: list[str] | str):
-        if isinstance(cmd, str):
-            cmd = [cmd]
-        subprocess.run(f'ssh {self.cred} "{";".join(cmd)}"', check=True, shell=True)
+        if not isinstance(cmd, str):
+            cmd = f'"{";".join(cmd)}"'
+        subprocess.run(f'ssh {self.cred} {cmd}', check=True, shell=True)

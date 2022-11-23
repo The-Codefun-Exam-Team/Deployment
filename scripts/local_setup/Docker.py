@@ -1,9 +1,10 @@
 import subprocess
 from os import path
+from sys import stdout
 __all__ = ["install", "compose_up"]
 
 def run_command(*args) -> subprocess.CompletedProcess:
-    return subprocess.run(" ".join(["sudo", *args]), check=True, shell=True)
+    return subprocess.run(" ".join(["sudo", *args]), check=True, shell=True, stdout=stdout)
 
 def setup_repo() -> None:
     def enable_apt_https():
@@ -40,5 +41,5 @@ def compose_up():
     print("Starting docker compose")
     cwd = str(path.realpath(path.join(__file__,
                 path.pardir, path.pardir, path.pardir)))
-    subprocess.run(["docker", "compose", "up", "-d"], check=True, cwd=cwd)
+    subprocess.run(["docker", "compose", "up", "-d"], check=True, cwd=cwd, stdout=stdout)
     print("Finished docker compose up")
