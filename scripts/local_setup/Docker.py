@@ -29,8 +29,7 @@ def install_docker_engine() -> None:
     run_command("apt-get", "-qq", "-y", "update")
     run_command("apt-get", "-qq", "-y", "install", "docker-ce",
                 "docker-ce-cli", "containerd.io", "docker-compose-plugin")
-    print("Should be running Docker hello")
-    # run_command("docker", "run", "--rm", "hello-world")
+    run_command("docker", "run", "--rm", "hello-world")
 
 def install():
     setup_repo()

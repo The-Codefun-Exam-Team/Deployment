@@ -16,13 +16,12 @@ if __name__ == '__main__':
     no_ip_domain = input("No-IP domain name: ")
     no_ip_username = input("No-IP username: ")
     no_ip_password = input("No-IP password: ")
+    with fabric.Connection(host=ssh_addr, user="root") as c:
+        c.run("sudo apt-get update; sudo apt-get -qq -y install git")
+        c.run("rm -f -r Deployment")
+        c.run("git clone https://github.com/The-Codefun-Exam-Team/Deployment.git")
 
-    c = fabric.Connection(host=ssh_addr, user="root")
-    c.run("sudo apt-get update; sudo apt-get -qq -y install git")
-    c.run("rm -f -r Deployment")
-    c.run("git clone https://github.com/The-Codefun-Exam-Team/Deployment.git")
-
-    t = transfer.Transfer(c)
-    for name in config_files:
-        t.put(real_path(name), f"Deployment/data/{name}")
-    c.run(f'cd Deployment/scripts/local_setup; python3 LocalSetup.py {real_domain} {no_ip_domain} {no_ip_username} {no_ip_password}')
+        t = transfer.Transfer(c)
+        for name in config_files:
+            t.put(real_path(name), f"Deployment/data/{name}")
+        c.run(f'cd Deployment/scripts/local_setup; python3 LocalSetup.py {real_domain} {no_ip_domain} {no_ip_username} {no_ip_password}')
