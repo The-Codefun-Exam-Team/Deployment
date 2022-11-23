@@ -21,4 +21,5 @@ if __name__ == '__main__':
         "git clone https://github.com/The-Codefun-Exam-Team/Deployment.git"])
     
     c.send_file(data_path, f"Deployment")
+    print("Running local setup script")
     c.run_command(f"python3 Deployment/scripts/local_setup/LocalSetup.py {real_domain} {no_ip_domain} {no_ip_username} {no_ip_password}")

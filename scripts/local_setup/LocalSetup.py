@@ -1,8 +1,11 @@
 """Deploy the all parts of the project with a single click."""
+VERSION = 'v1.0.0'
+print(f"Local setup script version {VERSION}", flush=True)
+print("This is experimental")
+
 import time, sys
 import NoIP, Checks, Docker
 
-VERSION = 'v1.0.0'
 
 if __name__ == '__main__':
     real_domain, no_ip_domain = sys.argv[1], sys.argv[2]
