@@ -20,8 +20,7 @@ if __name__ == '__main__':
         c.run("sudo apt-get update; sudo apt-get -qq -y install git")
         c.run("rm -f -r Deployment")
         c.run("git clone https://github.com/The-Codefun-Exam-Team/Deployment.git")
-
-        t = transfer.Transfer(c)
+        
         for name in config_files:
-            t.put(real_path(name), f"Deployment/data/{name}")
+            c.put(real_path(name), f"Deployment/data/{name}")
         c.run(f'cd Deployment/scripts/local_setup; python3 LocalSetup.py {real_domain} {no_ip_domain} {no_ip_username} {no_ip_password}')
