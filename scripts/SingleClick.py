@@ -19,4 +19,4 @@ if __name__ == '__main__':
     t = transfer.Transfer(c)
     for name in config_files:
         t.put(f"data/{name}", f"Deployment/data/{name}")
-    c.run(f'cd Deployment/scripts; python3 LocalSetup.py {real_domain} {no_ip_domain} {no_ip_username} {no_ip_password}')
+    c.run(f'cd Deployment/scripts/local_setup; python3 LocalSetup.py {real_domain} {no_ip_domain} {no_ip_username} {no_ip_password}')
