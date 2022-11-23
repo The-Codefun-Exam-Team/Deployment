@@ -1,4 +1,0 @@
-*.pem
-*.env
-!default*.env
-temp.py

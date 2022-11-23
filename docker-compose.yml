@@ -10,7 +10,7 @@ services:
   back:
     image: minhnhatnoe/codefun-debug-backend:latest
     networks: [ cfd-bridge ]
-    env_file: backend.env
+    env_file: data/backend.env
     restart: unless-stopped
 
   proxy:
@@ -21,10 +21,10 @@ services:
     - 443:443
     volumes:
     - type: bind
-      source: cert.pem
+      source: data/cert.pem
       target: /cert/cert.pem
       read_only: true
-    env_file: proxy.env
+    env_file: data/proxy.env
     restart: unless-stopped
 
 networks:
