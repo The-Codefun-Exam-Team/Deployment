@@ -24,7 +24,7 @@ if __name__ == '__main__':
     Checks.check_availability("localhost", False)
 
     print('Updating No-IP record')
-    no_ip_r = NoIP.no_ip_update(no_ip_domain, no_ip_cred, "abc@def.com")
+    no_ip_r = NoIP.no_ip_update(no_ip_domain, no_ip_cred, "abc@def.com", VERSION)
 
     print('No-IP update success. Response from No-IP: ', no_ip_r)
 
