@@ -11,4 +11,4 @@ class SSHSession:
     def run_command(self, cmd: list[str] | str):
         if isinstance(cmd, str):
             cmd = [cmd]
-        subprocess.run(["ssh", self.cred, f'"{";".join(cmd)}"'], check=True, shell=True)
+        subprocess.run(f'ssh {self.cred} "{";".join(cmd)}"', check=True, shell=True)
