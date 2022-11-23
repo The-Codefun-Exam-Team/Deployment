@@ -21,10 +21,10 @@ if __name__ == '__main__':
     time.sleep(10)
 
     print("Checking availability")
-    check_availability("localhost", False)
+    Checks.check_availability("localhost", False)
 
     print('Updating No-IP record')
-    no_ip_r = no_ip_update(no_ip_domain, no_ip_cred, "abc@def.com")
+    no_ip_r = NoIP.no_ip_update(no_ip_domain, no_ip_cred, "abc@def.com")
 
     print('No-IP update success. Response from No-IP: ', no_ip_r)
 
@@ -32,4 +32,4 @@ if __name__ == '__main__':
     time.sleep(5*60)
 
     print("Checking availability at the real domain")
-    check_availability(real_domain, True)
+    Checks.check_availability(real_domain, True)
