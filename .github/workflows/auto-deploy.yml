@@ -1,0 +1,23 @@
+name: Deploy 
+
+on:
+  push:
+    branches: 
+      # Push with tag main
+      - "main"
+  pull_request:	
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    name: Deploy containers
+    runs-on: ubuntu-latest
+    needs: push_to_registry
+    steps:
+      - name: Connect and call command
+        uses: appleboy/ssh-action@master
+        with:
+          username: root
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          script: cd ${{ secrets.WORK_DIR }}; git pull; docker compose pull; docker compose up -d
