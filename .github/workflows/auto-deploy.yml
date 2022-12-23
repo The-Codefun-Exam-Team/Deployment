@@ -10,9 +10,8 @@ on:
 
 jobs:
   deploy:
-    name: Deploy containers
+    name: Deploy new docker compose file
     runs-on: ubuntu-latest
-    needs: push_to_registry
     steps:
       - name: Connect and call command
         uses: appleboy/ssh-action@master
