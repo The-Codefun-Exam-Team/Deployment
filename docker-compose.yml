@@ -7,6 +7,11 @@ services:
     networks: [ cfd-bridge ]
     restart: unless-stopped
 
+  ui-ssr:
+    image: minhnhatnoe/codefun-debug-frontend-ssr:latest
+    networks: [ cfd-bridge ]
+    restart: unless-stopped
+
   back:
     image: minhnhatnoe/codefun-debug-backend:latest
     networks: [ cfd-bridge ]
