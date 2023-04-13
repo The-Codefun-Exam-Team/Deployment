@@ -1,0 +1,25 @@
+name: Deploy new Docker Compose file
+
+# Avoids having multiple instances running
+concurrency:
+  group: build-image
+  cancel-in-progress: true
+
+on: push
+env:
+  registry: ghcr.io
+  image_name: ${{ github.repository }}
+
+jobs:
+  deploy:
+    name: Deploy containers
+    runs-on: ubuntu-latest
+    needs: push_to_registry
+    steps:
+      - name: Connect and pull
+        uses: appleboy/ssh-action@master
+        with:
+          username: debug-cd
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          script: ~/update.sh

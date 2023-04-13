@@ -3,23 +3,23 @@
 version: "3.9"
 services:
   ui:
-    image: minhnhatnoe/codefun-debug-frontend:latest
+    image: ghcr.io/the-codefun-exam-team/exam-frontend:latest
     networks: [ cfd-bridge ]
     restart: unless-stopped
 
   ui-ssr:
-    image: minhnhatnoe/codefun-debug-frontend-ssr:latest
+    image: ghcr.io/the-codefun-exam-team/frontend-ssr:latest
     networks: [ cfd-bridge ]
     restart: unless-stopped
 
   back:
-    image: minhnhatnoe/codefun-debug-backend:latest
+    image: ghcr.io/the-codefun-exam-team/exam-backend:latest
     networks: [ cfd-bridge ]
     env_file: data/backend.env
     restart: unless-stopped
 
   proxy:
-    image: minhnhatnoe/codefun-debug-proxy:latest
+    image: ghcr.io/the-codefun-exam-team/proxy-server:latest
     networks: [ cfd-bridge ]
     ports:
     - 80:80
