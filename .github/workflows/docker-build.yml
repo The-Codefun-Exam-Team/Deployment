@@ -16,7 +16,6 @@ jobs:
   deploy:
     name: Deploy containers
     runs-on: ubuntu-latest
-    needs: push_to_registry
     steps:
       - name: Connect and pull
         uses: appleboy/ssh-action@master
