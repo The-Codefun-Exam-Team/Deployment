@@ -5,7 +5,9 @@ concurrency:
   group: build-image
   cancel-in-progress: true
 
-on: push
+on:
+  push
+
 env:
   registry: ghcr.io
   image_name: ${{ github.repository }}
