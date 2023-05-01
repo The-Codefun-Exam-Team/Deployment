@@ -10,6 +10,7 @@ services:
   ui-ssr:
     image: ghcr.io/the-codefun-exam-team/frontend-ssr:latest
     networks: [ cfd-bridge ]
+    env_file: data/ui-ssr.env
     restart: unless-stopped
 
   back:
