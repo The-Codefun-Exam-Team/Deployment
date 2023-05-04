@@ -67,7 +67,7 @@ jobs:
     if: ${{ always() }}
     steps:
       - name: Print log
-        run: echo "Grace? ${{ needs.push_to_registry.grace_exit }}"
+        run: echo "Grace? ${{ needs.push_to_registry.outputs.grace_exit }}"
 
       # - name: Connect and pull
       #   uses: appleboy/ssh-action@master
