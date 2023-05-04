@@ -64,10 +64,14 @@ jobs:
     name: Deploy containers
     runs-on: ubuntu-latest
     needs: push_to_registry
-    if: ${{ (success()) || (needs.push_to_registry.grace_exit == 'true') }}
+    if: ${{ always() }}
     steps:
+      - name: Print log
+        run: echo "Success? ${{ success()) }} | Grace? ${{ needs.push_to_registry.grace_exit == 'true' }}
+
       - name: Connect and pull
         uses: appleboy/ssh-action@master
+        if: ${{ (success()) || (needs.push_to_registry.grace_exit == 'true') }}
         with:
           username: root
           host: ${{ secrets.SSH_HOST }}
