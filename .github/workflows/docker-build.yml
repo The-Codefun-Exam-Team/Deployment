@@ -28,10 +28,10 @@ jobs:
         id: dockerfile
         run: |
             if [ -f "Dockerfile" ]; then
-              echo "grace_exit=true" >> "$GITHUB_OUTPUT"
-              exit 1
+              echo "grace_exit=false" >> "$GITHUB_OUTPUT"
             else
               echo "grace_exit=false" >> "$GITHUB_OUTPUT"
+              exit 1
             fi
 
       - name: Log in to Github Packages
