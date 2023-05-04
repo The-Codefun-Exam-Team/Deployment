@@ -30,7 +30,7 @@ jobs:
             if [ -f "Dockerfile" ]; then
               echo "grace_exit=false" >> "$GITHUB_OUTPUT"
             else
-              echo "grace_exit=false" >> "$GITHUB_OUTPUT"
+              echo "grace_exit=true" >> "$GITHUB_OUTPUT"
               exit 1
             fi
 
