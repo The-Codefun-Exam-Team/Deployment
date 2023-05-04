@@ -69,10 +69,10 @@ jobs:
       - name: Print log
         run: echo "Grace? ${{ needs.push_to_registry.outputs.grace_exit }}"
 
-      # - name: Connect and pull
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     username: root
-      #     host: ${{ secrets.SSH_HOST }}
-      #     key: ${{ secrets.SSH_KEY }}
-      #     script: ~/update.sh
+      - name: Connect and pull
+        uses: appleboy/ssh-action@master
+        with:
+          username: root
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          script: ~/update.sh
