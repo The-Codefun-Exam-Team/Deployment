@@ -67,13 +67,13 @@ jobs:
     if: ${{ always() }}
     steps:
       - name: Print log
-        run: echo "Success? ${{ success()) }} | Grace? ${{ needs.push_to_registry.grace_exit == 'true' }}
+        run: echo "Grace? ${{ needs.push_to_registry.grace_exit == 'true' }}
 
-      - name: Connect and pull
-        uses: appleboy/ssh-action@master
-        if: ${{ (success()) || (needs.push_to_registry.grace_exit == 'true') }}
-        with:
-          username: root
-          host: ${{ secrets.SSH_HOST }}
-          key: ${{ secrets.SSH_KEY }}
-          script: ~/update.sh
+      # - name: Connect and pull
+      #   uses: appleboy/ssh-action@master
+      #   if: ${{ (success()) || (needs.push_to_registry.grace_exit == 'true') }}
+      #   with:
+      #     username: root
+      #     host: ${{ secrets.SSH_HOST }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     script: ~/update.sh
