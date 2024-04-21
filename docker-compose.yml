@@ -2,36 +2,66 @@
 
 version: "3.9"
 services:
-  ui:
-    image: ghcr.io/the-codefun-exam-team/exam-frontend:latest
-    networks: [ cfd-bridge ]
+  db-pooler:
+    image: edoburu/pgbouncer:1.22.0-p0
     restart: unless-stopped
 
-  ui-ssr:
-    image: ghcr.io/the-codefun-exam-team/frontend-ssr:latest
-    networks: [ cfd-bridge ]
-    env_file: data/ui-ssr.env
+    volumes:
+    - type: bind
+      source: /run/postgresql
+      target: /run/postgresql
+    - type: volumes
+      source: db-pooler-socket
+      target: /run/pgbouncer
+
+    env_file: data/db-pooler.env
+    environment:
+      - DB_HOST=/run/postgresql
+      - LISTEN_ADDR=" "
+      - AUTH_TYPE=trust
+      - UNIX_SOCKET_DIR=/run/pgbouncer
+
+  codefun-debug:
+    depends_on: [ db-pooler ]
+    image: ghcr.io/the-codefun-exam-team/codefun-debug:latest
     restart: unless-stopped
 
-  back:
-    image: ghcr.io/the-codefun-exam-team/exam-backend:latest
     networks: [ cfd-bridge ]
-    env_file: data/backend.env
-    restart: unless-stopped
+    volumes:
+    - type: bind
+      source: /run/postgresql
+      target: /run/postgresql
+    - type: volumes
+      source: db-pooler-socket
+      target: /run/pgbouncer
+
+    env_file: data/codefun-debug.env
 
   proxy:
-    image: ghcr.io/the-codefun-exam-team/proxy-server:latest
-    networks: [ cfd-bridge ]
+    depends_on: [ codefun-debug ]
+    image: haproxy:2.9.7-alpine
+    restart: unless-stopped
     ports:
     - 80:80
     - 443:443
+
+    networks: [ cfd-bridge ]
     volumes:
     - type: bind
       source: data/cert.pem
       target: /cert/cert.pem
       read_only: true
+    - type: bind
+      source: data/haproxy.cfg
+      target: /usr/local/etc/haproxy/haproxy.cfg
+      read_only: true
+
+    sysctls:
+      - net.ipv4.ip_unprivileged_port_start=0
     env_file: data/proxy.env
-    restart: unless-stopped
+
+volumes:
+  db-pooler-socket:
 
 networks:
   cfd-bridge:
