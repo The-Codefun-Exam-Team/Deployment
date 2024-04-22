@@ -14,4 +14,4 @@ Step 4: Verify all containers are properly running with ```docker ps```. Contain
 
 ## SSH Command for Github Action
 
-A good starting point would be using `ssh -o StrictHostKeyChecking=no -i ~/ssh_key <username>@<hostname> ~/update.sh`.
+A good starting point would be using `ssh -o StrictHostKeyChecking=no -i ~/ssh_key <username>@<hostname> "~/update.sh"`.
