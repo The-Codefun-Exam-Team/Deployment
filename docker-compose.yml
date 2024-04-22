@@ -42,8 +42,8 @@ services:
     image: haproxy:2.9.7-alpine
     restart: unless-stopped
     ports:
-    - 80:80
-    - 443:443
+    - "${HTTP_BIND}:80"
+    - "${HTTPS_BIND}:443"
 
     networks: [ cfd-bridge ]
     volumes:
