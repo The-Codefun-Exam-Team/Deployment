@@ -1,0 +1,17 @@
+name: Deploy
+
+# Avoids having multiple instances running
+concurrency:
+  group: build-image
+  cancel-in-progress: true
+
+on:
+  push:
+
+jobs:
+  deploy:
+    name: Deploy containers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connect and pull
+        run: echo "${{ secrets.SSH_KEY }}" > ~/ssh_key && ${{ secrets.SSH_DEPLOY_COMMAND }}
