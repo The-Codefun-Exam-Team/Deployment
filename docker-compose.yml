@@ -20,6 +20,7 @@ services:
       - LISTEN_ADDR=" "
       - AUTH_TYPE=trust
       - UNIX_SOCKET_DIR=/run/pgbouncer
+      - POOL_MODE=transaction
 
   codefun-debug:
     depends_on: [ db-pooler ]
