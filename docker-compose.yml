@@ -34,7 +34,7 @@ services:
     - type: volume
       source: db-pooler-socket
       target: /run/pgbouncer
-
+    user: root
     env_file: data/codefun-debug.env
 
   proxy:
