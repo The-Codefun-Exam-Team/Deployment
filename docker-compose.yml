@@ -21,6 +21,7 @@ services:
       - UNIX_SOCKET_DIR=/run/pgbouncer
       - POOL_MODE=transaction
       - USER=root
+    user: root
 
   codefun-debug:
     depends_on: [ db-pooler ]
