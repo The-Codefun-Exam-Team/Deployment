@@ -3,7 +3,6 @@
 version: "3.9"
 services:
   codefun-debug:
-    depends_on: [ db-pooler ]
     image: ghcr.io/the-codefun-exam-team/codefun-debug:latest
     restart: unless-stopped
 
