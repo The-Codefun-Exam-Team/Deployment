@@ -2,27 +2,6 @@
 
 version: "3.9"
 services:
-  db-pooler:
-    image: edoburu/pgbouncer:1.22.0-p0
-    restart: unless-stopped
-
-    volumes:
-    - type: bind
-      source: /run/postgresql
-      target: /run/postgresql
-    - type: volume
-      source: db-pooler-socket
-      target: /run/pgbouncer
-
-    env_file: data/db-pooler.env
-    environment:
-      - DB_HOST=/run/postgresql
-      - AUTH_TYPE=trust
-      - UNIX_SOCKET_DIR=/run/pgbouncer
-      - POOL_MODE=transaction
-      - USER=suzume
-    user: root
-
   codefun-debug:
     depends_on: [ db-pooler ]
     image: ghcr.io/the-codefun-exam-team/codefun-debug:latest
@@ -33,9 +12,6 @@ services:
     - type: bind
       source: /run/postgresql
       target: /run/postgresql
-    - type: volume
-      source: db-pooler-socket
-      target: /run/pgbouncer
     user: root
     env_file: data/codefun-debug.env
 
@@ -61,9 +37,6 @@ services:
     sysctls:
       - net.ipv4.ip_unprivileged_port_start=0
     env_file: data/proxy.env
-
-volumes:
-  db-pooler-socket:
 
 networks:
   cfd-bridge:
