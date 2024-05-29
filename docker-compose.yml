@@ -4,7 +4,6 @@ version: "3.9"
 services:
   codefun-debug:
     image: ghcr.io/the-codefun-exam-team/codefun-debug:latest
-    restart: 
 
     networks: [ cfd-bridge ]
     volumes:
