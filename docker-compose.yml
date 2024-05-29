@@ -24,11 +24,11 @@ services:
     networks: [ cfd-bridge ]
     volumes:
     - type: bind
-      source: data/cert.pem
+      source: ./data/cert.pem
       target: /cert/cert.pem
       read_only: true
     - type: bind
-      source: data/haproxy.cfg
+      source: ./data/haproxy.cfg
       target: /usr/local/etc/haproxy/haproxy.cfg
       read_only: true
 
