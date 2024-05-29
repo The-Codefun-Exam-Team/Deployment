@@ -14,5 +14,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Connect and pull
-        run: echo "Disabled due to unknown error"
-        # run: echo "${{ secrets.SSH_KEY }}" > ~/ssh_key && chmod 400 ~/ssh_key && ${{ secrets.SSH_DEPLOY_COMMAND }} > /dev/null 2>&1
+        run: echo "${{ secrets.SSH_KEY }}" > ~/ssh_key && chmod 400 ~/ssh_key && ${{ secrets.SSH_DEPLOY_COMMAND }}
