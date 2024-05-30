@@ -4,6 +4,7 @@ version: "3.9"
 services:
   codefun-debug:
     image: ghcr.io/the-codefun-exam-team/codefun-debug:latest
+    restart: on-failure:5
 
     networks: [ cfd-bridge ]
     volumes:
@@ -16,7 +17,7 @@ services:
   proxy:
     depends_on: [ codefun-debug ]
     image: haproxy:2.9.7-alpine
-    restart: unless-stopped
+    restart: on-failure:5
     ports:
     - "${HTTP_BIND}:80"
     - "${HTTPS_BIND}:443"
